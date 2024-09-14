@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int b[1000005]={0};
+void snt() {
+	for(int i=0; i<=1000000; i++) {
+		b[i]=1;
+	}
+	b[0]=b[1]=0;
+	for(int i=2; i<=sqrt(1000000); i++) {
+		if(b[i]) {
+			for(int j=i*i; j<=1000000; j+=i) {
+				b[j]=0;
+			}
+		}
+	}
+} 
+
+int main() {
+    int t; cin >> t;
+    snt();
+    while (t--){
+        long long n;
+        cin >> n;
+        long long res = -1; 
+        while (n%2==0){
+            n/=2;
+            res = 2;
+        }
+        for (long long i = 3; i<= sqrt (n); i+=2){
+            while (n%i==0){
+                n/=i;
+                res = i;
+            }
+        }
+        if (n>2) res = n;
+        cout << res;
+        cout << "\n";
+        }
+}
