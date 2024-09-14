@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main (){
+    int t;
+    cin >> t;
+    while (t--){
+        string code;
+        cin >> code;
+
+        size_t pos = code.find("084");
+
+        string newCode = code.substr(0, pos) + code.substr(pos + 3);
+
+        cout << newCode << endl;
+    }
+}
