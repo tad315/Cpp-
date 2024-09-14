@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+long long gt (long long n){
+    long long sum_gt = 1;
+    for (long long i = 2; i<=n; ++i) sum_gt *= i;
+    return sum_gt;
+}
+int main (){
+    long long n; cin >> n;
+    long long sum = 1;
+    for (long long i = 2; i<=n; ++i) sum+=gt(i);
+    cout << sum;
+}
