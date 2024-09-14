@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        long long n, k; 
+        cin >> n >> k;
+        if (k==0) return 0;
+        long long sum_T = k*(k-1)/2;
+        long long du = n%k;
+        long long T = n/k;
+        long long sum_du = du*(du+1)/2;
+        cout << T*sum_T + sum_du << "\n";
+    }
+}
