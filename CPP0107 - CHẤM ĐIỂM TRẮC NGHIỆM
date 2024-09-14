@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const vector <char> Ma_101 = {'A','B','B','A','D','C','C','A','B','D','C','C','A','B','D'};
+const vector <char> Ma_102 = {'A','C','C','A','B','C','D','D','B','B','C','D','D','B','B'};
+int main (){
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector <char> dap_an(15);
+        for (int i = 0; i<15; ++i){
+            cin >> dap_an[i];
+        }
+        double diem = 0.0;
+        if (n==101){
+            for (int i = 0; i<15; ++i)
+                if (dap_an[i]==Ma_101[i])
+                    diem += 10.0/15.0;
+        }
+        else if (n==102){
+            for (int i = 0; i<15; ++i)
+                if (dap_an[i]==Ma_102[i])
+                    diem += 10.0/15.0;
+        }
+        cout << fixed << setprecision(2)<< diem<< "\n";
+    }   
+}
