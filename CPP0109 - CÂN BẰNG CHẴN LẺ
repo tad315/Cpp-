@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int check (int n){
+    int chan = 0, le = 0;
+    while (n>0){
+        int tmp = n%10;
+        if (tmp %2==0) chan++;
+        else le++;
+        n/=10;
+    }
+    return chan == le;
+}
+void solve (int n){
+    int start = pow(10, n-1);
+    int end = pow(10, n);
+    vector <int> dayso;
+    for (int i = start; i<= end; ++i){
+        if (check(i)) dayso.push_back(i);
+    }
+    int cnt = 0;
+    for (int num: dayso){
+        cout << num;
+        cnt ++;
+        if (cnt%10==0) cout << "\n";
+        else cout << " ";
+    }
+}
+int main (){
+    int n; cin >> n;
+    solve(n);
+}
