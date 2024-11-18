@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define fast ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+// 1. Nhập vào thông tin 10 nhân viên, lưu vào file "NhanVien.txt"
+// Thông tin của mỗi nhân viên bao gồm có: 
+// - Mã số nhân viên
+// - Họ tên 
+// - Hệ số lương (hs)
+// - Lương cơ bản (lcb)
+// - Phụ cấp (pc)
+// 2. Đọc thông tin nhân viên từ file "NhanVien.txt" để tính tổng lương của mỗi nhân viên ra màn hình theo công thức: 
+// Tổng lương = lcb*hs+pc
+// 3. Tìm và tin ra thông tin của nhân viên có tổng lương cao nhất và lương thấp nhất
+//
+class NhanVien {
+private:
+    string maSo, hoTen;
+    float hs;
+    ll lcb, pc;
+
+public:
+    void nhapThongTin() {
+        cin >> maSo;
+        cin.ignore();
+        getline(cin, hoTen);
+        cin >> hs >> lcb >> pc;
+    }
+
+    void ghiThongTin(fstream &f) const {
+        f << maSo << "\n"
+          << hoTen << "\n"
+          << hs << "\n"
+          << lcb << "\n"
+          << pc << "\n";
+    }
+
+    void docThongTin(fstream &f) {
+        getline(f, maSo);
+        getline(f, hoTen);
+        f >> hs >> lcb >> pc;
+        f.ignore();
+    }
+
+    void hienThiThongTin() const {
+        cout << maSo << " " << hoTen << " " << getLuong() << "\n";
+    }
+
+    ll getLuong() const {
+        return hs * lcb + pc;
+    }
+};
+
+void NhapDSNV() {
+    fstream f("NhanVien.txt", ios::out);
+    for (int i = 0; i < 10; ++i) {
+        NhanVien nv;
+        nv.nhapThongTin();
+        nv.ghiThongTin(f);
+    }
+    f.close();
+}
+
+void DocDSNV() {
+    fstream f("NhanVien.txt", ios::in);
+    vector<NhanVien> danhSachNV;
+    NhanVien nv;
+
+    while (true) {
+        nv.docThongTin(f);
+        if (f.eof()) break;
+        danhSachNV.push_back(nv);
+    }
+    f.close();
+
+    int idxMax = 0, idxMin = 0;
+    for (int i = 1; i < danhSachNV.size(); ++i) {
+        if (danhSachNV[i].getLuong() > danhSachNV[idxMax].getLuong()) {
+            idxMax = i;
+        }
+        if (danhSachNV[i].getLuong() < danhSachNV[idxMin].getLuong()) {
+            idxMin = i;
+        }
+    }
+
+    danhSachNV[idxMax].hienThiThongTin();
+
+    danhSachNV[idxMin].hienThiThongTin();
+}
+
+int main() {
+    fast;
+    NhapDSNV();
+    DocDSNV();
+    return 0;
+}
